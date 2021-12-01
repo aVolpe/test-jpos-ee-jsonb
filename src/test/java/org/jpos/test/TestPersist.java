@@ -7,8 +7,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.junit.Test;
 
-import java.util.Arrays;
-
 import static org.junit.Assert.assertNotNull;
 
 public class TestPersist {
@@ -29,15 +27,28 @@ public class TestPersist {
         assertNotNull(loaded);
 
         System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(loaded.getParams()));
+
+        TestPojo testPojo = new ObjectMapper().treeToValue(loaded.getParams(), TestPojo.class);
+        System.out.println(testPojo.getName());
     }
 
     public ObjectNode createDummy() throws Exception {
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode root = mapper.createObjectNode();
-        root.set("integer", mapper.convertValue(1, JsonNode.class));
-        root.set("string", mapper.convertValue("string", JsonNode.class));
-        root.set("bool", mapper.convertValue(true, JsonNode.class));
-        root.set("array", mapper.convertValue(Arrays.asList("a", "b", "c"), JsonNode.class));
+        root.set("name", mapper.convertValue("name", JsonNode.class));
         return root;
+    }
+
+    public static class TestPojo {
+        private String name;
+
+        public String getName() {
+            return name;
+        }
+
+        public TestPojo setName(String name) {
+            this.name = name;
+            return this;
+        }
     }
 }
