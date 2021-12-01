@@ -1,0 +1,14 @@
+version: '3'
+services:
+
+  db:
+    image: postgis/postgis:12-3.0
+    ports:
+      - "5432:5432"
+    environment:
+      - DB_NAME=test
+      - DB_USER=test
+      - DB_PASS=test
+      - POSTGRES_PASSWORD=test
+      - POSTGRES_USER=test
+

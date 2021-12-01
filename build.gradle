@@ -1,0 +1,16 @@
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+    maven { url 'https://jpos.org/maven' }
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    testImplementation 'junit:junit:4.13.2'
+    implementation 'org.postgresql:postgresql:42.3.1'
+    implementation "org.jpos.ee:jposee-dbsupport:2.2.8-SNAPSHOT"
+    implementation 'org.hibernate:hibernate-core:5.6.1.Final'
+}
